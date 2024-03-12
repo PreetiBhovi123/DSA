@@ -1,0 +1,793 @@
+1. 2D ARRAY EXAMPLE
+#include<stdio.h>
+main()
+{
+    int a[2][2];
+    int i,j,r=2,c=2;
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+    }
+    for(i=0;i<r;i++)
+    {
+
+        for(j=0;j<c;j++)
+        {
+            printf("%d ",a[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+
+2.2D ARRAY SUM
+#include<stdio.h>
+void read(int [100][100],int , int);
+void display(int [100][100], int , int);
+void sum(int[100][100], int [100][100],int [100][100], int , int);
+void sum_dis(int[100][100], int [100][100],int [100][100], int , int);
+main()
+{
+    int c,r;
+    int a[100][100] , b[100][100] , s[100][100];
+    printf("Enter the number of row and colums\n");
+    scanf("%d%d",&r,&c);
+    read(a,r,c);
+    dislpay(a,r,c);
+    read(b,r,c);
+    display(b,r,c);
+    sum(a,b,s,r,c);
+    sum_dis(a,b,s,r,c);
+}
+void read(int a[100][100],int r, int c)
+{
+    int i,j;
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+    }
+}
+void display(int a[100][100],int r, int c)
+{
+    int i,j;
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            printf("%d  ",a[i][j]);
+        }
+        printf("\n");
+    }
+}
+void sum(int a[100][100],int b[100][100], int s[100][100], int r, int c)
+{
+    int i,j;
+    for(i=0;i<r;i++)
+    {
+        for (j=0;j<c;j++)
+        {
+            s[i][j]=a[i][j]+b[i][j];
+        }
+    }
+}
+void sum_dis(int a[100][100], int b[100][100],int s[100][100], int r, int c)
+{
+    int i,j;
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            printf("%d  ",s[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+
+3.2D MODULAR ARRAY
+#include<stdio.h>
+int main()
+void read()
+{
+    int a[10][10];
+    int n,m;
+    printf("enter no of rows /n");
+    scanf("%d",&n);
+    printf("enter no of columns /n");
+    scanf("%d",&m);
+
+    read(a,n,m); //function call
+    print(a,n,m); //display function call
+    return 0;
+}
+void read(int a[10][10],int n, int m)
+{
+    int i,j;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+    }
+void print(int a[10][10], int n, int m)
+{
+    int i,j;
+    for (i=0;i<n; i++)
+    {
+        for(j=0; j<m;j++)
+     printf("%d",a[i][j]);
+    }
+}
+}
+
+
+4.AREA POINTERS
+#include<stdio.h>
+void area(float , float *, float *);
+main()
+{
+    float r;
+    float A, C;
+    scanf("%f", &r);
+    area(r,&A,&C);
+    printf("area=%f\n circumference=%f", A,C);
+
+}
+void area (float r, float *A,float *C)
+{
+   *A=3.142*r*r;
+   *C=3.142*r*2;
+}
+
+
+5.CIRCULAR DIUBLY LINKED LIST
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node*prev;
+    struct node*next;
+};
+struct node *add_beg(struct node *);
+struct node *add_end(struct node*);
+void display(struct node*);
+struct node *delete_beg(struct node*);
+struct node *delete_end(struct node*);
+struct node *add_pos(struct node*,int);
+main()
+{
+    struct node *head=NULL;
+    int pos,v,ch;
+    while(1)
+  {
+    printf("Enter 1 to add at beg\nEnter 2 to add at end\nEnter 3 to display\nEnetr 4 to delete at beg\nEnter 5 to delete at end\nEnter 6 to add at pos\n");
+    scanf("%d",&ch);
+    switch(ch)
+    {
+        case 1:head=add_beg(head);
+               break;
+        case 2:head=add_end(head);
+               break;
+         case 3:if(head==NULL)
+                {
+                   printf("Enter list is empty\n");
+                   break;
+                }
+                display(head);
+                break;
+        case 4:if(head==NULL)
+                {
+                   printf("Enter list is empty\n");
+                   break;
+                }
+                else
+                {
+                    head=delete_beg(head);
+                    break;
+                }
+        case 5: if(head==NULL)
+                {
+                   printf("Enter list is empty\n");
+                   break;
+                }
+                  else
+                {
+                    head=delete_end(head);
+                    break;
+                }
+         case 6:printf("enter the position\n");
+                scanf("%d",&pos);
+                head=add_pos(head,pos);
+                    break;
+    }
+  }
+}
+struct node *getnode()
+{
+    struct node *newnode=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the data\n");
+    scanf("%d",&newnode->data);
+    newnode->next=newnode;
+    newnode->prev=newnode;
+    return newnode;
+}
+struct node*add_beg(struct node *head)
+{
+    struct node*newnode=getnode();
+    if(head==NULL)
+    {
+        head=newnode;
+        return head;
+    }
+    newnode->next=head;
+    newnode->prev=head->prev;
+    head->prev->next=newnode;
+    head->prev=newnode;
+    head=newnode;
+    return head;
+
+}
+struct node *add_end(struct node*head)
+{
+   struct node*newnode=getnode();
+    if(head==NULL)
+    {
+        head=newnode;
+        return head;
+    }
+    head->prev->next=newnode;
+    newnode->prev=head->prev->next;
+    newnode->next=head;
+    head->prev=newnode;
+    return head;
+
+}
+void display(struct node *head)
+{
+    struct node *cur=head;
+    do
+    {
+        printf("data:%d\n",cur->data);
+        cur=cur->next;
+    }while(cur!=head);
+}
+struct node *delete_beg(struct node *head)
+{
+  if(head->next==head)
+  {
+      printf("deleted data:%d\n",head->data);
+      free(head);
+      head=NULL;
+      return head;
+  }
+  struct node *cur=head->next;
+  printf("deleted data:%d\n",head->data);
+  cur->prev=head->prev;
+  head->prev->next=cur;
+  free(head);
+  head=cur;
+  return head;
+}
+struct node *delete_end(struct node*head)
+{
+   if(head->next==head)
+  {
+      printf("deleted data:%d\n",head->data);
+      free(head);
+      return NULL;
+  }
+   struct node *cur=head->prev;
+   head->prev=cur->prev;
+   cur->prev->next=head;
+   printf("deleted data:%d\n",cur->data);
+   free(cur);
+   return head;
+}
+struct node *add_pos(struct node*head,int pos)
+{
+    struct node*newnode=getnode();
+    if(head==NULL)
+    {
+        head=newnode;
+        return head;
+    }
+    if(pos<=0)
+    {
+        newnode->next=head;
+        newnode->prev=head->prev;
+        head->prev=newnode;
+        head->prev->next=newnode;
+        return head;
+    }
+    int i;
+    struct node *cur=head;
+    for(i=0;i<pos-1&&cur->next!=head;i++)
+    {
+        cur=cur->next;
+    }
+    newnode->prev=cur;
+    newnode->next=cur->next;
+    cur->next=newnode;
+    newnode->next->prev=newnode;
+    return head;
+
+};
+
+
+
+6.BUBBLE SORT
+#include<stdio.h>
+void read (int [],int);
+void display(int[],int);
+void elements(int[],int);
+main()
+{
+    int a[100],n;
+    printf("Enter the number of elements\n");
+    scanf("%d",&n);
+    read(a,n);
+    display(a,n);
+    elements(a,n);
+}
+void read(int a[100],int n)
+{
+    int i;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+}
+void display(int a[100],int n)
+{
+    int i ;
+    for(i=0;i<n;i++)
+    {
+        printf("%d\t",a[i]);
+    }
+}
+void elements(int a[100],int n)
+{
+    int i,j,temp;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<(n-i-1);j++)
+        {
+            if(a[j]>a[j+1])
+            {
+                temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=a[j];
+            }
+        }
+    }
+}
+
+
+
+7.DIAGONAL ELEMENTS
+#include<stdio.h>
+void read(int[100][100],int,int);
+void display(int[100][100],int,int);
+void daigonal(int [100][100],int,int);
+main()
+{
+
+    int a[100][100];
+    int r,c;
+    printf("enter the number of rows and colums\n");
+    scanf("%d%d",&r,&c);
+    read(a,r,c);
+    display(a,r,c);
+    daigonal(a,r,c);
+}
+void read(int a[100][100],int r,int c)
+{
+    int i,j;
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+    }
+}
+void display(int a[100][100],int r,int c)
+{
+    int i,j;
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            printf("%d  ",a[i][j]);
+        }
+        printf("\n");
+    }
+}
+void daigonal(int a[100][100],int r, int c)
+{
+    int i,j;
+    for (i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            if (i==j)
+            {
+                printf("%d\n",a[i][j]);
+            }
+        }
+    }
+}
+
+
+8.COUNTING INTERGERS
+#include<stdio.h>
+int count_digit(int);
+main()
+{
+    int n,count;
+    printf("Enter the value of n\n");
+    scanf("%d",&n);
+    count=count_digit(n);
+    printf("Number of digit=%d",count);
+}
+int count_digit(int n)
+{
+    int count=0;
+    while (n)
+    {
+
+    }
+    return count;
+}
+
+
+
+
+9.CALCULATOR
+#include<stdio.h>
+main()
+{
+    float a,b,res;
+    char ch;
+    printf("enter the value of a,b\n");
+    scanf("%f%f%*c%c",&a,&b,&ch);
+    switch(ch)
+    {
+        case '+':res=(a+b);
+               printf("R=%f",res);
+        break;
+        case '-':res=(a-b);
+               printf("R=%f",res);
+        break;
+        case '*':res=a*b;
+                 printf("R=%f",res);
+        break;
+        case '/':if (b==0)
+                {
+                    printf("error");
+
+                }
+                else
+          {
+           res=a/b;
+           printf("R=%f",res);
+          }
+         break;
+         case '%':res=(int)a%(int)b;
+         printf("R=%f",res);
+         break;
+    }
+}
+
+
+
+10.ARMSTRONG NUMBER
+#include<stdio.h>
+int arm (int);
+main ()
+{
+    int n,sum;
+    printf("Enter the value of n\n");
+    scanf ("%d",&n);
+    sum=arm(n);
+    if (sum==n)
+    {
+        printf("It is an armstrong number");
+    }
+    else
+    {
+        printf(" It is not an armstrong number");
+    }
+
+}
+int arm(int n)
+{
+    int sum=0,ld;
+    while (n!=0)
+    {
+        ld=n%10;
+        sum=sum+(ld*ld*ld);
+        n=n/10;
+    }
+    return sum;
+}
+
+
+11.ARRAY TIME
+#include<stdio.h>
+int time (int,int,int);
+main()
+{
+    int h,m,s,T;
+    printf("Enter the value of h,m,s\n");
+    scanf("%d%d%d",&h,&m,&s);
+    T=time(h,m,s);
+    printf("TIME=%d",T);
+}
+int time(int h,int m,int s)
+{
+    int T;
+    T=m*60+h*3600+s;
+    return T;
+}
+
+
+12.COMPARE STRING
+#include<stdio.h>
+void read(char []);
+void display (char []);
+int str_cmp(char[], char []);
+main()
+{
+    char a[100], b[100];
+    int x;
+    read(a);
+    read(b);
+    display (a);
+    display(b);
+    printf("\n");
+    x=str_cmp(a,b);
+    if (x==0)
+    {
+        printf("strings arr=e same");
+    }
+    else
+    {
+        printf("strings are not same");
+    }
+}
+void read(char a[100]);
+{
+    gets(a);
+}
+void display(char b[100])
+{
+    puts(b);
+}
+int str_cmp(char a[100], char b[100])
+{
+    int l1,l2;
+    l1=strlen(a);
+}
+
+
+13.CIRCULAR LINKED LIST (SINGER)
+#include<stdio.h>
+#include<stdlib.h>
+ struct time
+{
+    int min;
+    int sec;
+};
+ struct song
+{
+    char name[16];
+    char singer[15];
+    char movie[39];
+    struct time t;
+    struct song*next;
+};
+struct song*add_pos(struct song*, int);
+struct song *delete_pos(struct song *, int);
+struct song*getsong();
+main()
+{
+    struct song *tail=NULL;
+    int ch,pos;
+    while(1)
+    {
+        printf("enter 1 to add a song\nenter 2 to delete a song\nenter 3 to display\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:printf("enter the position\n");
+                   scanf("%d",&pos);
+                   tail=add_pos(tail, pos);
+                   break;
+            case 2:printf("enter the position\n");
+                 scanf("%d",&pos);
+                 if(tail==NULL)
+                 {
+                     printf("list is empty\n");
+                 }
+                 else
+                 {
+                     tail=delete_pos(tail,pos);
+                 }
+                     break;
+           case 3:display(tail);
+                  break;
+        }
+    }
+}
+struct song* add_pos(struct song*tail, int pos)
+{
+    int i;
+    struct song*newsong=getsong();
+    struct song*cur;
+    if(tail==NULL)
+    {
+        tail=newsong;
+        return tail;
+    }
+    cur=tail->next;
+    if(pos<=0)
+    {
+        newsong->next=tail->next;
+        tail->next=newsong;
+        return tail;
+    }
+    for(i=0;i<pos-1&&cur!=tail;i++)
+    {
+        cur=cur->next;
+    }
+    newsong->next=cur->next;
+    cur->next=newsong;
+    if(cur==tail)
+    {
+        tail=newsong;
+    }
+    return tail;
+}
+struct song*getsong()
+{
+    struct song*newsong=(struct song*)malloc(sizeof(struct song));
+    printf("song name\n");
+    scanf("%s",newsong->name);
+    printf("singer name\n");
+    scanf("%s",newsong->singer);
+    printf("movie name\n");
+    scanf("%s",newsong->movie);
+    printf("time\n");
+    scanf("%d%d",&newsong->t.min,&newsong->t.sec);
+    newsong->next=newsong;
+}
+struct song * delete_pos(struct song *tail,int pos)
+{
+    struct song *cur=tail->next, *pre=NULL;
+    if(cur==tail)
+    {
+        printf("deleted information\n");
+        display(cur);
+        tail=NULL;
+        return tail;
+    }
+    if(pos<=0)
+    {
+        tail->next=cur->next;
+        display(cur);
+        free(cur);
+        return tail;
+    }
+    int i;
+    for(i=0;i<pos&&cur!=tail;i++)
+    {
+        pre=cur;
+        cur=cur->next;
+    }
+    pre->next=cur->next;
+    display(cur);
+    if(cur==tail)
+    {
+        tail=pre;
+    }
+    free(cur);
+    return tail;
+}
+void display(struct song *tail)
+{
+    struct song *cur;
+    if(tail==NULL)
+    {
+       printf("list is empty\n");
+        return 0;
+    }
+    cur=tail->next;
+    do
+    {
+        printf("name:%s\n",cur->name);
+        printf("singer:%s\n",cur->singer);
+        printf("Movie:%s\n",cur->movie);
+        printf("duration:%d:%d\n",cur->t.min,cur->t.sec);
+        cur=cur->next;
+    }while(cur!=tail->next);
+}
+
+
+
+14.ELECTRICITY CONSUMED
+#include<stdio.h>
+#include<math.h>
+main()
+{
+   int cu;
+   float bill;
+   printf("enter cu\n");
+   scanf("%d",&cu);
+   if (cu<0)
+   {
+       printf("invalid input");
+
+   }
+   else if (cu<=150)
+   {
+       bill=cu*3;
+   }
+   else if (cu>=151 && cu<=350)
+   {
+       bill=100+(cu-150)*3.75;
+   }
+   else if (cu>=351 && cu<=450)
+   {
+       bill=250+(cu-350)*4;
+   }
+   else if (cu>=451 && cu<=600)
+   {
+       bill=300+(cu-450)*4.25;
+   }
+   else
+   {
+       bill=400+(cu-600)*5;
+   }
+   printf("BILL=%f",bill);
+
+}
+
+
+
+15.ESUM AND OSUM
+#include<stdio.h>
+void sum(int);
+main()
+{
+    int n ;
+    printf("enter the value of n\n");
+    scanf("%d",&n);
+    sum(n);
+}
+void sum(int n)
+{
+    int esum=0,osum=0,num,i=1;
+    while (i<=n)
+    {
+        scanf("%d",&num);
+        if (num%2==0)
+        {
+            esum=esum + num;
+        }
+        else
+        {
+            osum=osum+num;
+        }
+        i++;
+    }
+    printf("Esum=%d\nOsum=%d",esum,osum);
+}
